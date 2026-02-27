@@ -1,0 +1,488 @@
+% ============================================================
+% Actividad 1 - Mapa Mental: Componentes de un Sistema de
+% Visión por Computadora
+% Seminario de Procesamiento de Imágenes
+% Colegio de Formación Educativa TENAM
+% ============================================================
+
+\documentclass[12pt,letterpaper]{article}
+
+% ============================================================
+% PAQUETES ESENCIALES
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[letterpaper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm,headheight=25pt]{geometry}
+\usepackage{afterpage}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{natbib}  % Para citas APA7 (\citep, \citet)
+\usepackage{authblk}
+\usepackage{tikz}
+\usepackage{lscape}    % Para página horizontal
+\usepackage{pdflscape} % Para rotar la página en el PDF
+\usetikzlibrary{mindmap, trees, backgrounds, arrows.meta, shapes.geometric, positioning, decorations.pathmorphing}
+
+% ============================================================
+% COLORES ACADÉMICOS Y PARA EL MAPA MENTAL
+% ============================================================
+\definecolor{titleColor}{RGB}{30,64,175}
+\definecolor{sectionColor}{RGB}{30,58,138}
+\definecolor{linkColor}{RGB}{59,130,246}
+% Ramas del mapa mental
+\definecolor{colorCamaras}{RGB}{220,38,38}         % Rojo
+\definecolor{colorIluminacion}{RGB}{234,88,12}      % Naranja
+\definecolor{colorProcesamiento}{RGB}{22,163,74}    % Verde
+\definecolor{colorAlgoritmos}{RGB}{37,99,235}       % Azul
+\definecolor{colorTiposCamaras}{RGB}{168,85,247}    % Violeta
+\definecolor{colorSoftware}{RGB}{20,184,166}        % Teal
+\definecolor{colorTiposImagenes}{RGB}{202,138,4}    % Amarillo oscuro
+\definecolor{colorConversion}{RGB}{219,39,119}      % Rosa
+\definecolor{rootColor}{RGB}{30,58,138}             % Azul profundo (nodo raíz)
+
+% ============================================================
+% CONFIGURACIÓN DE HYPERREF
+% ============================================================
+\hypersetup{
+    colorlinks=true,
+    linkcolor=sectionColor,
+    filecolor=sectionColor,
+    urlcolor=linkColor,
+    citecolor=sectionColor,
+    pdftitle={Mapa Mental: Componentes de un Sistema de Visión por Computadora},
+    pdfauthor={Ismael Rufino Grajeda Marín}
+}
+
+% ============================================================
+% CONFIGURACIÓN DE TÍTULOS
+% ============================================================
+\titleformat{\section}
+    {\color{titleColor}\Large\bfseries}
+    {\thesection.}{0.5em}{}
+
+\titleformat{\subsection}
+    {\color{sectionColor}\large\bfseries}
+    {\thesubsection.}{0.5em}{}
+
+\titleformat{\subsubsection}
+    {\color{sectionColor}\normalsize\bfseries}
+    {\thesubsubsection.}{0.5em}{}
+
+% ============================================================
+% CONFIGURACIÓN DE ENCABEZADO Y PIE DE PÁGINA
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{Mapa Mental: Visión por Computadora}}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\hbox to\headwidth{%
+  \color{sectionColor}\leaders\hrule height \headrulewidth\hfill}}
+
+% ============================================================
+% INFORMACIÓN DEL DOCUMENTO
+% ============================================================
+\newcommand{\institucion}{COLEGIO DE FORMACIÓN EDUCATIVA TENAM}
+\newcommand{\programa}{Seminario de Procesamiento de Imágenes}
+\newcommand{\materia}{Seminario de Procesamiento de Imágenes}
+\newcommand{\actividad}{ACTIVIDAD PRELIMINAR 1}
+\newcommand{\tituloTrabajo}{MAPA MENTAL: COMPONENTES DE UN\\[0.2cm] SISTEMA DE VISIÓN POR COMPUTADORA}
+\newcommand{\estudianteNombre}{Ismael Rufino Grajeda Marín}
+\newcommand{\estudianteGrado}{M.I.A.}
+\newcommand{\profesorNombre}{Daniel González Scarpulli}
+\newcommand{\fechaEntrega}{20 de febrero de 2026}
+
+% ============================================================
+% CONFIGURACIÓN DE CITAS APA 7ª EDICIÓN
+% ============================================================
+\bibliographystyle{apalike}
+\setcitestyle{authoryear,open={(},close={)},semicolon}
+
+% ============================================================
+% CONFIGURACIÓN DEL DOCUMENTO
+% ============================================================
+\setstretch{1.4}
+\setlength{\parindent}{1cm}
+\setlength{\parskip}{0.3em}
+
+% ============================================================
+% INICIO DEL DOCUMENTO
+% ============================================================
+\begin{document}
+
+% ============================================================
+% PORTADA INSTITUCIONAL
+% ============================================================
+\begin{titlepage}
+    \centering
+    \vspace*{0.3cm}
+
+    % Logo institucional (si existe)
+    % \includegraphics[width=0.22\textwidth]{logo.png}\\[0.3cm]
+
+    {\Large \textbf{\institucion}}\\[0.3cm]
+    {\large \programa}\\[1cm]
+
+    % Línea decorativa
+    {\color{sectionColor}\rule{0.85\linewidth}{1.5pt}}\\[0.6cm]
+
+    % Información de la materia
+    {\large \textbf{Materia:} \materia}\\[0.3cm]
+    {\normalsize \textbf{Actividad:} \actividad}\\[1.2cm]
+
+    % Título del trabajo
+    {\LARGE\color{titleColor}\textbf{\tituloTrabajo}}\\[1.5cm]
+
+    % Línea decorativa
+    {\color{sectionColor}\rule{0.85\linewidth}{1pt}}\\[1cm]
+
+    % Información del estudiante y profesor
+    \begin{flushleft}
+    \hspace{2.5cm}\begin{minipage}{0.75\textwidth}
+        \textbf{Presenta:}\\
+        \estudianteNombre, \estudianteGrado\\[0.6cm]
+
+        \textbf{Docente:}\\
+        \profesorNombre\\[0.6cm]
+    \end{minipage}
+    \end{flushleft}
+
+    \vfill
+
+    {\large \fechaEntrega}
+    \vspace{0.5cm}
+\end{titlepage}
+
+\newpage
+\setcounter{page}{1}
+
+% ============================================================
+% INTRODUCCIÓN
+% ============================================================
+\section{Introducción}
+
+La visión por computadora (\textit{Computer Vision}) es una rama de la inteligencia artificial que
+permite a los sistemas informáticos interpretar y comprender el contenido visual del mundo, habilitando
+procesos que antes eran exclusivos de la percepción humana \citep{gonzalez2018digital}.
+Esta disciplina integra elementos de procesamiento de señales, matemáticas, óptica y aprendizaje
+automático para dotar a las máquinas de la capacidad de ``ver'' y razonar sobre imágenes y video.
+
+Un sistema de visión por computadora completo involucra múltiples componentes interdependientes:
+hardware de captura (cámaras), sistemas de iluminación, algoritmos de procesamiento e interpretación,
+y software especializado. Cada uno de estos elementos cumple un rol específico y su correcta
+integración determina la efectividad del sistema en aplicaciones reales, como la inspección industrial
+automatizada, el reconocimiento facial, la conducción autónoma y la robótica \citep{bradski2008learning}.
+
+El presente trabajo tiene como objetivo organizar y sintetizar los conceptos fundamentales
+asociados a los componentes de un sistema de visión por computadora mediante la elaboración
+de un mapa mental. Este recurso visual permite evidenciar de manera clara y jerarquizada las
+relaciones entre los distintos temas: tipos de cámaras, sistemas de iluminación, software de
+procesamiento, tipos de imágenes, conversiones entre formatos y la clasificación de los
+algoritmos de procesamiento \citep{szeliski2010computer}.
+
+La representación en forma de mapa mental facilita la comprensión integral de la disciplina,
+estableciendo conexiones conceptuales que promueven el aprendizaje significativo y el
+posterior desarrollo de habilidades en el área del procesamiento digital de imágenes.
+
+% ============================================================
+% DESARROLLO - MAPA MENTAL
+% ============================================================
+\newpage
+\section{Desarrollo: Mapa Mental}
+
+\subsection{Descripción del Mapa Mental}
+
+El mapa mental presentado a continuación organiza jerárquicamente los componentes
+principales de un sistema de visión por computadora. El nodo central representa
+al sistema en su totalidad, del cual se desprenden ocho ramas temáticas principales,
+cada una con sus respectivos sub-nodos: los \textbf{elementos del sistema},
+\textbf{tipos de iluminación}, \textbf{tipos de cámaras de video},
+\textbf{software de procesamiento}, \textbf{tipos de imágenes},
+\textbf{conversiones entre tipos de imágenes} y
+\textbf{clasificación de algoritmos} \citep{nixon2019feature}.
+
+Cada rama se distingue mediante un color único para facilitar su identificación
+visual, siguiendo los principios del aprendizaje visual propuestos por Buzan (2006).
+Los conceptos están organizados de lo general a lo específico, manteniendo una
+estructura de árbol radial centrada en el tema principal.
+
+% Mapa mental en página apaisada para mayor espacio
+\newpage
+\newgeometry{top=1cm,bottom=1cm,left=1cm,right=1cm}
+\thispagestyle{empty}
+\begin{landscape}
+\begin{figure}[H]
+\centering
+% El mapa se dibuja con concept distance reducido y se escala para caber
+\begin{tikzpicture}[
+    % Estilo nodo raíz
+    root concept/.append style={
+        concept color=rootColor,
+        text=white,
+        font=\bfseries\normalsize,
+        minimum size=2.8cm
+    },
+    % Ramas nivel 1
+    level 1 concept/.append style={
+        font=\bfseries\scriptsize,
+        text=white,
+        minimum size=1.8cm,
+        sibling angle=45
+    },
+    % Ramas nivel 2
+    level 2 concept/.append style={
+        font=\tiny,
+        text=white,
+        minimum size=1.1cm
+    },
+    % Ramas nivel 3
+    level 3 concept/.append style={
+        font=\tiny,
+        text=white,
+        minimum size=0.85cm
+    },
+    mindmap,
+    grow cyclic,
+    every annotation/.style={fill=white, font=\tiny},
+    scale=0.72, transform shape
+]
+
+% NODO RAÍZ
+\node[concept, root concept] {Sistema de\\Visión por\\Computadora}
+  child[concept color=colorCamaras, grow=90] {
+    node[concept] {Cámaras}
+      child[concept color=colorCamaras!80] { node[concept] {Mono-\\cromo} }
+      child[concept color=colorCamaras!80] { node[concept] {TriCCD} }
+      child[concept color=colorCamaras!80] { node[concept] {Bayer} }
+  }
+  child[concept color=colorIluminacion, grow=45] {
+    node[concept] {Iluminación}
+      child[concept color=colorIluminacion!80] { node[concept] {Natural} }
+      child[concept color=colorIluminacion!80] { node[concept] {Artificial} }
+      child[concept color=colorIluminacion!80] { node[concept] {Direc-\\cional} }
+      child[concept color=colorIluminacion!80] { node[concept] {Difusa} }
+      child[concept color=colorIluminacion!80] { node[concept] {Contraste} }
+      child[concept color=colorIluminacion!80] { node[concept] {Sombra} }
+  }
+  child[concept color=colorSoftware, grow=0] {
+    node[concept] {Software}
+      child[concept color=colorSoftware!80] { node[concept] {Matlab} }
+      child[concept color=colorSoftware!80] { node[concept] {OpenCV} }
+      child[concept color=colorSoftware!80] { node[concept] {Java\\Vision} }
+  }
+  child[concept color=colorConversion, grow=315] {
+    node[concept] {Conversión\\Imágenes}
+      child[concept color=colorConversion!80] { node[concept] {Bin.\\→ Mono} }
+      child[concept color=colorConversion!80] { node[concept] {Mono\\→ Color} }
+      child[concept color=colorConversion!80] { node[concept] {Color\\→ Bin.} }
+  }
+  child[concept color=colorTiposImagenes, grow=270] {
+    node[concept] {Tipos\\Imágenes}
+      child[concept color=colorTiposImagenes!80] { node[concept] {Binaria} }
+      child[concept color=colorTiposImagenes!80] { node[concept] {Mono-\\cromo} }
+      child[concept color=colorTiposImagenes!80] { node[concept] {Color} }
+  }
+  child[concept color=colorAlgoritmos, grow=225] {
+    node[concept] {Algoritmos}
+      child[concept color=colorAlgoritmos!80] {
+        node[concept] {Bajo\\Nivel}
+          child[concept color=colorAlgoritmos!60] { node[concept] {Mejora} }
+          child[concept color=colorAlgoritmos!60] { node[concept] {Filtrado} }
+          child[concept color=colorAlgoritmos!60] { node[concept] {Ruido} }
+      }
+      child[concept color=colorAlgoritmos!80] {
+        node[concept] {Medio\\Nivel}
+          child[concept color=colorAlgoritmos!60] { node[concept] {Segmen-\\tación} }
+          child[concept color=colorAlgoritmos!60] { node[concept] {Bordes} }
+          child[concept color=colorAlgoritmos!60] { node[concept] {Extrac-\\ción} }
+      }
+      child[concept color=colorAlgoritmos!80] {
+        node[concept] {Alto\\Nivel}
+          child[concept color=colorAlgoritmos!60] { node[concept] {Recono-\\cimiento} }
+          child[concept color=colorAlgoritmos!60] { node[concept] {Segui-\\miento} }
+          child[concept color=colorAlgoritmos!60] { node[concept] {Análisis} }
+      }
+  }
+  child[concept color=colorProcesamiento, grow=180] {
+    node[concept] {Procesa-\\miento}
+      child[concept color=colorProcesamiento!80] { node[concept] {Adqui-\\sición} }
+      child[concept color=colorProcesamiento!80] { node[concept] {Pre-\\proceso} }
+      child[concept color=colorProcesamiento!80] { node[concept] {Análisis} }
+      child[concept color=colorProcesamiento!80] { node[concept] {Salida} }
+  }
+  child[concept color=colorTiposCamaras, grow=135] {
+    node[concept] {Elementos\\Sistema}
+      child[concept color=colorTiposCamaras!80] { node[concept] {Cámaras} }
+      child[concept color=colorTiposCamaras!80] { node[concept] {Ilumina-\\ción} }
+      child[concept color=colorTiposCamaras!80] { node[concept] {Procesa-\\miento} }
+      child[concept color=colorTiposCamaras!80] { node[concept] {Algorit-\\mos} }
+  };
+\end{tikzpicture}
+\caption{Mapa Mental: Componentes de un Sistema de Visión por Computadora}
+\label{fig:mapa-mental}
+\end{figure}
+\end{landscape}
+\restoregeometry
+
+\newpage
+
+\subsection{Descripción de los Componentes}
+
+\subsubsection{Elementos del Sistema de Visión por Computadora}
+
+Un sistema de visión por computadora se compone de cuatro elementos esenciales
+que trabajan de manera coordinada \citep{gonzalez2018digital}:
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Cámaras:} Dispositivos de captura que adquieren imágenes del entorno.
+    \item \textbf{Iluminación:} Sistema que garantiza condiciones visuales adecuadas para la captura.
+    \item \textbf{Procesamiento de imágenes:} Conjunto de operaciones para transformar y mejorar las imágenes.
+    \item \textbf{Algoritmos de visión:} Métodos computacionales que interpretan el contenido de las imágenes.
+\end{itemize}
+
+\subsubsection{Tipos de Iluminación}
+
+La iluminación es un factor crítico en los sistemas de visión por computadora, ya que
+afecta directamente la calidad de las imágenes capturadas \citep{baxes1994digital}. Los
+principales tipos son:
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Luz natural:} Proveniente del sol; variable e impredecible.
+    \item \textbf{Luz artificial:} Controlada y consistente; fuentes LED, fluorescentes o incandescentes.
+    \item \textbf{Iluminación direccional:} Proviene de una dirección específica, generando sombras definidas.
+    \item \textbf{Iluminación difusa:} Dispersa, reduce sombras y proporciona iluminación uniforme.
+    \item \textbf{Iluminación de contraste:} Maximiza la diferencia entre objetos y fondo para facilitar la detección.
+    \item \textbf{Efectos de sombra:} Técnica que utiliza sombras deliberadas para revelar texturas y formas 3D.
+\end{itemize}
+
+\subsubsection{Tipos de Cámaras de Video}
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Monocromáticas:} Capturan imágenes en escala de grises con alta sensibilidad a la luz.
+    \item \textbf{TriCCD:} Utilizan tres sensores CCD, uno por canal de color (R, G, B), con alta fidelidad cromática.
+    \item \textbf{Bayer:} Emplean un único sensor con un arreglo de filtros de color en patrón Bayer para reconstruir color \citep{bayer1976color}.
+\end{itemize}
+
+\subsubsection{Software para Procesamiento de Imágenes}
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Matlab:} Entorno de cómputo numérico con \textit{Image Processing Toolbox}; ampliamente usado en investigación.
+    \item \textbf{OpenCV:} Biblioteca de código abierto en C++/Python; estándar de facto en aplicaciones en tiempo real \citep{bradski2008learning}.
+    \item \textbf{JavaVision:} Biblioteca orientada a Java para procesamiento de imágenes en entornos Java.
+\end{itemize}
+
+\subsubsection{Tipos de Imágenes}
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Binaria:} Solo dos valores posibles (0 y 1); ideal para segmentación y detección de contornos.
+    \item \textbf{Monocromática (escala de grises):} Valores de intensidad de 0 a 255; utilizada en análisis de texturas.
+    \item \textbf{Color:} Tres o más canales (ej. RGB, HSV, YCbCr); permite análisis basado en cromaticidad \citep{gonzalez2018digital}.
+\end{itemize}
+
+\subsubsection{Conversión entre Tipos de Imágenes}
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{De binaria a monocromática:} Escalado de valores {0,1} al rango [0,255].
+    \item \textbf{De monocromática a color:} Pseudocoloreado o asignación de paleta (e.g., mapa de calor).
+    \item \textbf{De color a binaria:} Umbralizacion (\textit{thresholding}) sobre imagen en escala de grises.
+\end{itemize}
+
+\subsubsection{Clasificación de Algoritmos de Procesamiento}
+
+Según \citet{gonzalez2018digital}, los algoritmos se clasifican en tres niveles:
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Bajo nivel:} Operan directamente sobre píxeles. Incluyen mejora de imagen, filtrado (pasa-bajas, pasa-altas) y eliminación de ruido (gaussiano, mediana).
+    \item \textbf{Medio nivel:} Generan representaciones más abstractas. Incluyen segmentación, detección de bordes (Canny, Sobel) y extracción de características.
+    \item \textbf{Alto nivel:} Interpretación semántica. Incluyen reconocimiento de objetos, seguimiento (\textit{tracking}) y análisis de contenido mediante aprendizaje profundo.
+\end{itemize}
+
+% ============================================================
+% CONCLUSIONES
+% ============================================================
+\newpage
+\section{Conclusiones}
+
+La elaboración del mapa mental sobre los componentes de un sistema de visión
+por computadora permitió identificar y organizar de manera visual los elementos
+clave que conforman esta disciplina. A través de este ejercicio se concluye lo
+siguiente:
+
+\begin{enumerate}[leftmargin=1.5cm]
+    \item La visión por computadora es un campo interdisciplinario que integra óptica,
+    electrónica, matemáticas y ciencias de la computación. Ninguno de sus componentes
+    funciona de manera aislada; la correcta integración de cámaras, iluminación,
+    software y algoritmos determina el éxito de cualquier sistema.
+
+    \item El tipo de iluminación tiene un impacto directo sobre la calidad de la imagen
+    capturada. Una iluminación inadecuada puede generar sombras, saturación o
+    subexposición que degradan el rendimiento de los algoritmos de procesamiento.
+
+    \item La elección de la cámara --- monocromática, TriCCD o Bayer --- debe alinearse
+    con los requerimientos de la aplicación, considerando variables como fidelidad de
+    color, sensibilidad lumínica y costo.
+
+    \item El software de procesamiento (Matlab, OpenCV, JavaVision) proporciona el
+    marco tecnológico sobre el que se implementan los algoritmos. La selección de la
+    herramienta adecuada depende del entorno de desarrollo, el lenguaje de programación
+    y los requisitos de tiempo real.
+
+    \item La jerarquía de algoritmos (bajo, medio y alto nivel) refleja el flujo lógico
+    del procesamiento: primero se mejora la imagen, luego se extraen características
+    y finalmente se realiza la interpretación semántica. Esta cadena de procesamiento
+    es fundamental para comprender el diseño de soluciones basadas en visión artificial.
+
+    \item El mapa mental como herramienta de aprendizaje resulta altamente efectivo
+    para representar relaciones complejas entre conceptos, facilitando la retención
+    y comprensión de los temas propios del procesamiento de imágenes.
+\end{enumerate}
+
+% ============================================================
+% REFERENCIAS BIBLIOGRÁFICAS (APA 7ª edición)
+% ============================================================
+\newpage
+\section*{Referencias}
+\addcontentsline{toc}{section}{Referencias}
+
+\begin{thebibliography}{99}
+
+\bibitem[{Baxes(1994)}]{baxes1994digital}
+Baxes, G. A. (1994). \textit{Digital image processing: Principles and applications}.
+Wiley.
+
+\bibitem[{Bayer(1976)}]{bayer1976color}
+Bayer, B. E. (1976). \textit{Color imaging array} (U.S. Patent No. 3,971,065).
+U.S. Patent and Trademark Office.
+
+\bibitem[{Bradski y Kaehler(2008)}]{bradski2008learning}
+Bradski, G., y Kaehler, A. (2008). \textit{Learning OpenCV: Computer vision with the
+OpenCV library}. O'Reilly Media.
+
+\bibitem[{Buzan(2006)}]{buzan2006}
+Buzan, T. (2006). \textit{El libro de los mapas mentales: Cómo utilizar al máximo las
+capacidades de la mente} (2.ª ed.). Urano.
+
+\bibitem[{González y Woods(2018)}]{gonzalez2018digital}
+González, R. C., y Woods, R. E. (2018). \textit{Digital image processing} (4.ª ed.).
+Pearson.
+
+\bibitem[{Nixon y Aguado(2019)}]{nixon2019feature}
+Nixon, M. S., y Aguado, A. S. (2019). \textit{Feature extraction \& image processing
+for computer vision} (4.ª ed.). Academic Press.
+
+\bibitem[{Szeliski(2010)}]{szeliski2010computer}
+Szeliski, R. (2010). \textit{Computer vision: Algorithms and applications}.
+Springer. \url{https://szeliski.org/Book/}
+
+\end{thebibliography}
+
+\end{document}
